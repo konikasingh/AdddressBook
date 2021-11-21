@@ -51,7 +51,7 @@ namespace AddresssBook
             email = Console.ReadLine();
             arlist.Add(email);
 
-            // arlist.AddRange(firstName, lastName, address, state, zipCode, phoneNumber, email);
+            //arlist.AddRange(firstName, lastName, address, state, zipCode, phoneNumber, email);
         }
 
         public void putDetails() // displaying contact details
@@ -67,7 +67,5 @@ namespace AddresssBook
 
             }
 
-        }
-
-    }
+        }    }
 }

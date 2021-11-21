@@ -32,7 +32,7 @@ namespace AddresssBook
                         }
                         break;
                     case 2:
-                       book.GetContactDetails();
+                       book.putDetails();
                        break;
 
                     //case 3:
