@@ -7,7 +7,7 @@ namespace AddresssBook
     {
         static void Main(string[] args)
         {
-            UC1AddressBook book = new UC1AddressBook(); // creating object of class
+            UC2AddressBook book = new UC2AddressBook(); // creating object of class
             string yes = "y";
             string y;
 
@@ -31,9 +31,9 @@ namespace AddresssBook
                             book.GetContactDetails();
                         }
                         break;
-                    //case 2:
-                    //    book.ContactDetails();
-                    //    break;
+                    case 2:
+                       book.GetContactDetails();
+                       break;
 
                     //case 3:
                     //    book.editContact();
