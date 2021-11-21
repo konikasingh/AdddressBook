@@ -67,5 +67,21 @@ namespace AddresssBook
 
             }
 
-        }    }
+        }
+        public void editContact()
+        {
+            Console.WriteLine("enter the name which want to edit contact:\n");
+            string name = Console.ReadLine();
+
+            if (arlist.Contains(name))
+            {
+
+                GetContactDetails();
+
+
+            }
+            arlist.SetRange(0, arlist);
+
+        }
+    }
 }
