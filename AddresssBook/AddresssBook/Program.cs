@@ -7,7 +7,7 @@ namespace AddresssBook
     {
         static void Main(string[] args)
         {
-            UC2AddressBook book = new UC2AddressBook(); // creating object of class
+            UC5AddressBook book = new UC5AddressBook(); // creating object of class
             string yes = "y";
             string y;
 
@@ -32,19 +32,19 @@ namespace AddresssBook
                         }
                         break;
                     case 2:
-                       book.putDetails();
+                       book.ContactDetails();
                        break;
 
-                    //case 3:
-                    //    book.editContact();
-                    //    break;
+                    case 3:
+                        book.editContact();
+                        break;
 
-                    //case 4:
-                    //    book.removeContact();
-                    //    break;
+                    case 4:
+                        book.RemoveContact();
+                        break;
 
-                    //default:
-                    //    break;
+                    default:
+                        break;
                 }
                 Console.WriteLine("\ndo you want to continue? press...y/n");
                 y = Console.ReadLine();
