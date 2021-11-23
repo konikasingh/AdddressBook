@@ -8,11 +8,11 @@ using System.Collections;
 
 namespace AddresssBook
 {
-    public class UC5AddressBook
+    public class UC6AddressBook
     {
 
-        private LinkedList<ContactList> addressBook = new LinkedList<ContactList>();  //here created the empty LinkedList object 
-
+        public  LinkedList<ContactList> addressBook = new LinkedList<ContactList>();  //here created the empty LinkedList object 
+        
 
         public string firstName;
         public string lastName;
@@ -140,7 +140,7 @@ namespace AddresssBook
             }
         }
 
-        public void removeContact()    // for removing the contact 
+        public void RemoveContact()    // for removing the contact 
         {
             if (addressBook.Count == 0)      // here checking in List there is contact or not  if no the list is empty
             {
