@@ -15,9 +15,10 @@ namespace AddresssBook
         public int zipCode;
         public long phoneNumber;
         public string email;
+        public string city;
 
         
-        public ContactList(string firstName, string lastName, string[] address, string state, int zipCode, long phoneNumber, string email)
+        public ContactList(string firstName, string lastName, string[] address, string state, int zipCode, long phoneNumber, string email, string city)
         {
 
             this.firstName = firstName;
@@ -27,6 +28,7 @@ namespace AddresssBook
             this.zipCode = zipCode;
             this.phoneNumber = phoneNumber;
             this.email = email;
+            this.city = city;
 
         }
 

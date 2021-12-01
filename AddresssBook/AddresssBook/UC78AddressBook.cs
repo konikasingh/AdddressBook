@@ -10,8 +10,10 @@ namespace AddresssBook
 {
     public class UC6AddressBook
     {
-
-        public  LinkedList<ContactList> addressBook = new LinkedList<ContactList>();  //here created the empty LinkedList object 
+        //declaring list with class contacts type
+        public static List<ContactList> contacts = new List<ContactList>();
+        //declaring dictionary
+        public LinkedList<ContactList> addressBook = new LinkedList<ContactList>();  //here created the empty LinkedList object 
         
 
         public string firstName;
@@ -21,6 +23,7 @@ namespace AddresssBook
         public int zipCode;
         public long phoneNumber;
         public string email;
+        public string city;
 
       
         public void GetContactDetails()   // creating contact details of person
@@ -54,7 +57,10 @@ namespace AddresssBook
             Console.WriteLine("Enter the Email");
             email = Console.ReadLine();
 
-            ContactList contactList = new ContactList(firstName, lastName, address, state, zipCode, phoneNumber, email);
+            Console.WriteLine("Enter the City");
+            city = Console.ReadLine();
+
+            ContactList contactList = new ContactList(firstName, lastName, address, state, zipCode, phoneNumber, email, city);
 
 
             this.addressBook.AddLast(contactList);
@@ -74,7 +80,7 @@ namespace AddresssBook
             {
                 foreach (ContactList contactList in this.addressBook)
                 {
-                    Console.WriteLine($"FirstName= {contactList.firstName} LastName= {contactList.lastName} Address= {contactList.address} state= {contactList.state} ZipCode= {contactList.zipCode} Phone= {contactList.phoneNumber} Email= {contactList.email}");
+                    Console.WriteLine($"FirstName= {contactList.firstName} LastName= {contactList.lastName} Address= {contactList.address} state= {contactList.state} ZipCode= {contactList.zipCode} Phone= {contactList.phoneNumber} Email= {contactList.email} city= {contactList.city}");
 
                 }
             }
@@ -125,8 +131,11 @@ namespace AddresssBook
                         Console.WriteLine("Enter the Email");
                         contactList.email = Console.ReadLine();
 
+                        Console.WriteLine("Enter city Name : ");
+                        contactList.city = Console.ReadLine();
+
                         Console.WriteLine("updeted detalis List");
-                        Console.WriteLine($"FirstName= {contactList.firstName} LastName= {contactList.lastName} Address= {contactList.address} state= {contactList.state} ZipCode= {contactList.zipCode} Phone= {contactList.phoneNumber} Email= {contactList.email}");
+                        Console.WriteLine($"FirstName= {contactList.firstName} LastName= {contactList.lastName} Address= {contactList.address} state= {contactList.state} ZipCode= {contactList.zipCode} Phone= {contactList.phoneNumber} Email= {contactList.email} city= {contactList.city}");
 
                     }
                     else
@@ -168,6 +177,66 @@ namespace AddresssBook
                     }
                 }
             }
+        }
+
+        //this method takes the list and contactbook object of contacts class
+        public int SearchDuplicate(List<ContactList> contacts, ContactList contactBook)
+        {
+            //iteratingall elements in contact list by using for each loop
+            foreach (var Details in contacts)
+            {
+                //using lambda expression and equals method
+                var person = contacts.Find(p => p.firstName.Equals(contactBook.firstName));
+                if (person != null)
+                {
+                    Console.WriteLine("Already this contact exist with same first name : " + person.firstName);
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            return 0;
+        }
+        //This method for search person using city name
+        public void SearchCity()
+        {
+            Console.WriteLine("Please Enter Name of city");
+            string city = Console.ReadLine();
+            foreach (var Details in contacts)
+            {
+                var person = contacts.Find(p => p.city.Equals(city));
+                if (person != null)
+                {
+                    Console.WriteLine("{0} person in the {1}", Details.firstName, city);
+                }
+                else
+                {
+
+                }
+            }
+
+        }
+
+        //This method for search person using state name
+        public void SearchState()
+        {
+            Console.WriteLine("Please Enter Name of State");
+            string state = Console.ReadLine();
+            foreach (var Details in contacts)
+            {
+                var person = contacts.Find(p => p.state.Equals(state));
+                if (person != null)
+                {
+                    Console.WriteLine("{0} person in the {1}", Details.firstName, state);
+                }
+                else
+                {
+
+                }
+            }
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AddresssBook
         {
             
 
-                UC6AddressBook book = new UC6AddressBook(); // creating object of class
+                UC6AddressBook Person = new UC6AddressBook(); // creating object of class
                 string yes = "y";
                 string y;
 
@@ -18,7 +18,7 @@ namespace AddresssBook
                 string bookName = Console.ReadLine();
 
                 Dictionary<UC6AddressBook, string> dic = new Dictionary<UC6AddressBook, string>();
-                dic.Add(book, bookName);
+                dic.Add(Person, bookName);
                 display(dic);
  
 
@@ -26,7 +26,7 @@ namespace AddresssBook
             {
 
                     Console.WriteLine("Welcome to Address Book");
-                    Console.WriteLine("1.AddNewContact\n2.ShowContact\n3.EditContact\n4.RmoveContact");
+                    Console.WriteLine("1.AddNewContact\n2.ShowContact\n3.EditContact\n4.RmoveContact\n5.SearchCity\n6.SearchState");
                     Console.WriteLine("\nEnter your choice");
                     int ch = Convert.ToInt32(Console.ReadLine());
 
@@ -39,22 +39,28 @@ namespace AddresssBook
                             int n = Convert.ToInt32(Console.ReadLine());
                             for (int i = 0; i < n; i++)
                             {
-                                book.GetContactDetails();
+                            Person.GetContactDetails();
                             }
                             break;
                         case 2:
-                            book.ContactDetails();
+                            Person.ContactDetails();
                             break;
 
                         case 3:
-                            book.editContact();
+                            Person.editContact();
                             break;
 
                         case 4:
-                            book.RemoveContact();
+                            Person.RemoveContact();
+                            break;
+                        case 5:
+                            Person.SearchCity();
+                            break;
+                        case 6:
+                            Person.SearchState();
                             break;
 
-                        default:
+                    default:
                             break;
                     }
                     Console.WriteLine("\ndo you want to continue? press...y/n");
