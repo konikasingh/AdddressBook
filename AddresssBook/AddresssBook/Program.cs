@@ -10,14 +10,14 @@ namespace AddresssBook
         {
             
 
-                UC6AddressBook Person = new UC6AddressBook(); // creating object of class
+                UC9AddressBook Person = new UC9AddressBook(); // creating object of class
                 string yes = "y";
                 string y;
 
                 Console.WriteLine("enter the address book name");
                 string bookName = Console.ReadLine();
 
-                Dictionary<UC6AddressBook, string> dic = new Dictionary<UC6AddressBook, string>();
+                Dictionary<UC9AddressBook, string> dic = new Dictionary<UC9AddressBook, string>();
                 dic.Add(Person, bookName);
                 display(dic);
  
@@ -26,7 +26,7 @@ namespace AddresssBook
             {
 
                     Console.WriteLine("Welcome to Address Book");
-                    Console.WriteLine("1.AddNewContact\n2.ShowContact\n3.EditContact\n4.RmoveContact\n5.SearchCity\n6.SearchState");
+                    Console.WriteLine("1.AddNewContact\n2.ShowContact\n3.EditContact\n4.RmoveContact\n5.SearchCity\n6.SearchState\n7.ViewByCityOrStateName");
                     Console.WriteLine("\nEnter your choice");
                     int ch = Convert.ToInt32(Console.ReadLine());
 
@@ -59,6 +59,9 @@ namespace AddresssBook
                         case 6:
                             Person.SearchState();
                             break;
+                        case 7:
+                            Person.ViewByCityOrStateName();
+                            break;
 
                     default:
                             break;
@@ -69,7 +72,7 @@ namespace AddresssBook
                 while (yes == y);
             Console.ReadLine();                           
             }
-        public static void display(Dictionary<UC6AddressBook, string> dic)
+        public static void display(Dictionary<UC9AddressBook, string> dic)
         {
             foreach (var e in dic)
             {

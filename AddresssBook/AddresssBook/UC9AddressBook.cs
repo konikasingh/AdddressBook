@@ -8,13 +8,17 @@ using System.Collections;
 
 namespace AddresssBook
 {
-    public class UC6AddressBook
+    public class UC9AddressBook
     {
         //declaring list with class contacts type
         public static List<ContactList> contacts = new List<ContactList>();
         //declaring dictionary
-        public LinkedList<ContactList> addressBook = new LinkedList<ContactList>();  //here created the empty LinkedList object 
-        
+        public LinkedList<ContactList> addressBook = new LinkedList<ContactList>();  //here created the empty LinkedList object
+                                                                                     
+        //the citybook and statebook dictionaries are basically to store person details along with key as city/state 
+        public static Dictionary<string, List<ContactList>> cityBook = new Dictionary<string, List<ContactList>>();
+        public static Dictionary<string, List<ContactList>> stateBook = new Dictionary<string, List<ContactList>>();
+
 
         public string firstName;
         public string lastName;
@@ -106,7 +110,7 @@ namespace AddresssBook
 
                     if (contactList.firstName == name)
                     {
-                        Console.WriteLine($"FirstName= {contactList.firstName} LastName= {contactList.lastName} Address= {contactList.address} state= {contactList.state} ZipCode= {contactList.zipCode} Phone= {contactList.phoneNumber} Email= {contactList.email}");
+                        Console.WriteLine($"FirstName= {contactList.firstName} LastName= {contactList.lastName} Address= {contactList.address} state= {contactList.state} ZipCode= {contactList.zipCode} Phone= {contactList.phoneNumber} Email= {contactList.email} City= {contactList.city}");
                         Console.WriteLine("\nthe {0} is present you can edit the details...", contactList.firstName);
                         Console.WriteLine("enter the details");
 
@@ -135,7 +139,7 @@ namespace AddresssBook
                         contactList.city = Console.ReadLine();
 
                         Console.WriteLine("updeted detalis List");
-                        Console.WriteLine($"FirstName= {contactList.firstName} LastName= {contactList.lastName} Address= {contactList.address} state= {contactList.state} ZipCode= {contactList.zipCode} Phone= {contactList.phoneNumber} Email= {contactList.email} city= {contactList.city}");
+                        Console.WriteLine($"FirstName= {contactList.firstName} LastName= {contactList.lastName} Address= {contactList.address} state= {contactList.state} ZipCode= {contactList.zipCode} Phone= {contactList.phoneNumber} Email= {contactList.email} City= {contactList.city}");
 
                     }
                     else
@@ -180,16 +184,16 @@ namespace AddresssBook
         }
 
         //this method takes the list and contactbook object of contacts class
-        public int SearchDuplicate(List<ContactList> contacts, ContactList contactBook)
+        public int SearchDuplicate(List<ContactList> contactt, ContactList contactBookk)
         {
             //iteratingall elements in contact list by using for each loop
-            foreach (var Details in contacts)
+            foreach (var contactList in contactt)
             {
                 //using lambda expression and equals method
-                var person = contacts.Find(p => p.firstName.Equals(contactBook.firstName));
-                if (person != null)
+                var perso = contacts.Find(p => p.firstName.Equals(contactBookk.firstName));
+                if (perso != null)
                 {
-                    Console.WriteLine("Already this contact exist with same first name : " + person.firstName);
+                    Console.WriteLine("Already this contact exist with same first name : " + perso.firstName);
                     return 1;
                 }
                 else
@@ -204,12 +208,12 @@ namespace AddresssBook
         {
             Console.WriteLine("Please Enter Name of city");
             string city = Console.ReadLine();
-            foreach (var Details in contacts)
+            foreach (var contactList in contacts)
             {
                 var person = contacts.Find(p => p.city.Equals(city));
                 if (person != null)
                 {
-                    Console.WriteLine("{0} person in the {1}", Details.firstName, city);
+                    Console.WriteLine("{0} person in the {1}", contactList.firstName, city);
                 }
                 else
                 {
@@ -224,19 +228,133 @@ namespace AddresssBook
         {
             Console.WriteLine("Please Enter Name of State");
             string state = Console.ReadLine();
-            foreach (var Details in contacts)
+            foreach (var contactList in contacts)
             {
-                var person = contacts.Find(p => p.state.Equals(state));
-                if (person != null)
+                var personnn = contacts.Find(p => p.state.Equals(state));
+                if (personnn != null)
                 {
-                    Console.WriteLine("{0} person in the {1}", Details.firstName, state);
+                    Console.WriteLine("{0} person in the {1}", contactList.firstName, state);
                 }
                 else
                 {
-
+                    
                 }
+                
             }
 
         }
+
+        //This method for add person details by using city name
+        public void AddByCity()
+    {
+        foreach (var contactList in contacts)
+        {
+            string city = contactList.city;
+            if (cityBook.ContainsKey(city))
+            {
+                List<ContactList> exist = cityBook[city];
+                exist.Add(contactList);
+            }
+            else
+            {
+                List<ContactList> cityContact = new List<ContactList>();
+                cityContact.Add(contactList);
+                cityBook.Add(city, cityContact);
+            }
+        }
     }
+    //This method for add person details by using  state name
+    public void AddByState()
+    {
+        foreach (var contactList in contacts)
+        {
+            string state = contactList.state;
+            if (stateBook.ContainsKey(state))
+            {
+                List<ContactList> exists = stateBook[state];
+                exists.Add(contactList);
+
+            }
+            else
+            {
+                List<ContactList> stateContact = new List<ContactList>();
+                stateContact.Add(contactList);
+                stateBook.Add(state, stateContact);
+            }
+        }
+    }
+    /// <summary>
+    /// Views the by the selected option whther chosen to view by state or city
+    /// if the user selects to choose city, he has to selct 1 and 2 for statewise display of contacts
+    /// this method displayes city and all the common persons residing in that place
+    /// </summary>
+    public void ViewByCityOrStateName()
+    {
+        Console.WriteLine("Please select your option: \n 1 :  To view all contacts by city, \n 2 : To view all contacts by state.");
+        int choice = Convert.ToInt32(Console.ReadLine());
+
+        if (choice == 1)
+        {
+            int cityCount = cityBook.Count();
+            if (cityCount != 0)
+            {
+                foreach (KeyValuePair<string, List<ContactList>> item in cityBook)
+                {
+                    Console.WriteLine("\n Following are the Person details residing in the city -" + item.Key);
+                    foreach (var items in item.Value)
+                    {
+                        //Printing added details
+                        Console.WriteLine("First Name : " + items.firstName);
+                        Console.WriteLine("Last Name : " + items.lastName);
+                        Console.WriteLine("Address : " + items.address);
+                        Console.WriteLine("Phone Number : " + items.phoneNumber);
+                        Console.WriteLine("Email ID : " + items.email);
+                        Console.WriteLine("City : " + items.city);
+                        Console.WriteLine("State : " + items.state);
+                        Console.WriteLine("ZIP code : " + items.zipCode);
+                    }
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nCurrently no entries are inserted.");
+            }
+        }
+        else if (choice == 2)
+        {
+
+            int stateCount = stateBook.Count();
+            if (stateCount != 0)
+            {
+                foreach (KeyValuePair<string, List<ContactList>> item in stateBook)
+                {
+                    Console.WriteLine("\n Following are the Person details residing in the state -" + item.Key);
+                    foreach (var items in item.Value)
+                    {
+                        //Printing added details
+                        Console.WriteLine("First Name : " + items.firstName);
+                        Console.WriteLine("Last Name : " + items.lastName);
+                        Console.WriteLine("Address : " + items.address);
+                        Console.WriteLine("Phone Number : " + items.phoneNumber);
+                        Console.WriteLine("Email ID : " + items.email);
+                        Console.WriteLine("City : " + items.city);
+                        Console.WriteLine("State : " + items.state);
+                        Console.WriteLine("ZIP code : " + items.zipCode);
+                    }
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nCurrently no entries are inserted.");
+            }
+
+        }
+        else
+        {
+            Console.WriteLine("\nWrong entry, Please choose between 1 and 2");
+        }
+    }
+}
 }
